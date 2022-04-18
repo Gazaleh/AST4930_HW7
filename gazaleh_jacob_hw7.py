@@ -1,3 +1,5 @@
+#this was ran on miniconda
+
 #import the useful packages
 import astropy as ast
 import numpy as np
@@ -6,6 +8,7 @@ from astropy import units as u
 
 
 #import the relevant data
+#i saved the data to my folder from /blue/ast4930/desika_narayanan
 open('/home/jessa.gazaleh/AST4930/HW7/sed.txt', 'r')
 sed= np.loadtxt('/home/jessa.gazaleh/AST4930/HW7/sed.txt', delimiter= ",")
 
@@ -41,8 +44,33 @@ print(np.trapz(np.flip(lum_in_unit), np.flip(wv_in_unit)))
 integral=np.trapz(np.flip(lum_in_unit), np.flip(wv_in_unit))
 print(integral.to(u.erg/u.s))
 
+
+fig, ax = plt.subplots(1,2)
+
+#raw data graph
+ax[0].plot(wv, lum)
+ax[0].set_yscale("log")
+ax[0].set_xscale("log")
+ax[0].set_xlim([0,lum[0]])
+ax[0].set_ylabel("Wave length")
+ax[0].set_xlabel("Luminosity")
+
+#integrated section graph
+ax[1].plot(wv, lum)
+ax[1].bar(wv_in, lum_in)
+ax[1].set_yscale("log")
+ax[1].set_xscale("log")
+ax[1].set_xlim([0,lum[0]])
+ax[1].set_ylabel("Wave length")
+ax[1].set_xlabel("Luminosity")
+
+plt.show()
+plt.savefig('gazaleh_jacob_hw7.png', dpi=82)
+
+print(lum[0], lum[-1])
+
 """
-plt.plot(np.flip(wv), lum)
+ax[0,0].plot(wv, lum)
 plt.yscale("log")
 plt.xscale("log")
 plt.ylabel("Wave length")
